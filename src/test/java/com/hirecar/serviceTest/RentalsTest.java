@@ -128,12 +128,4 @@ public class RentalsTest {
         TestCase.assertEquals(rentals.size(), lista.size());
     }
 
-
-    @Test(expected = Exception.class)
-    public void TestCanceledRent() {
-        Mockito.when(rentalsRepository.findById(Mockito.anyLong())).thenReturn(java.util.Optional.ofNullable(rental));
-        Mockito.when(rentalService.isAllowCancellation(Mockito.any(Rentals.class))).thenReturn((Throwable) Exception);
-
-        rentalService.cancelRent(rental.getId());
-    }
 }
