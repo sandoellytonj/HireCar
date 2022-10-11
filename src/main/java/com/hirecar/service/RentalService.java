@@ -40,6 +40,7 @@ public class RentalService {
     public Rentals toHire(Rentals rental) {
         verify(Objects.isNull(rental), HttpStatus.NOT_FOUND, "Objetivo passado está vazio");
         Car car = carService.search(rental.getCar().getId()).get();
+        verify(car.getAvaliable() == false, HttpStatus.BAD_REQUEST, "Carro já alugado");
         BigDecimal total = totalRent(rental);
         rental.setTotal(total);
         rental.setCreated_at(LocalDateTime.now());
